@@ -1,0 +1,12 @@
+#encuentrame {
+    font-size: 10px;
+    background-color: transparent;
+    border-color: transparent;
+    color: blue;
+    position: absolute;
+    top: 30px;
+    right: 8px;
+}
+.input-field{
+    margin-bottom: 10px;
+}

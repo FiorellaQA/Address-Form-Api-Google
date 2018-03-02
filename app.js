@@ -3,10 +3,22 @@ var componentForm = {
     street_number: 'short_name',
     route: 'long_name',
     locality: 'long_name',
+    administrative_area_level_2: 'short_name',
     administrative_area_level_1: 'short_name',
     country: 'long_name',
     postal_code: 'short_name'
 };
+/*
+for (var i = 0; i < place.address_components.length; i++) {
+    var addressType = place.address_components[i].types[0];
+    console.log(addressType);
+    if (componentForm[addressType]) {
+        var val = place.address_components[i][componentForm[addressType]];
+        document.getElementById(addressType).value = val;
+    }
+}
+
+*/
 var map = {};
 var latitud,
     longitud,
@@ -28,7 +40,9 @@ function initAutocomplete() {
     placeSearch = document.getElementById('autocomplete');
     autocomplete = new google.maps.places.Autocomplete(placeSearch, {
         types: ['geocode'],
-        componentRestrictions: {country: 'pe'}
+        componentRestrictions: {
+            country: 'pe'
+        }
     });
 
     autocomplete.addListener('place_changed', fillInAddress);
@@ -36,16 +50,26 @@ function initAutocomplete() {
 
 function fillInAddress() {
     var place = autocomplete.getPlace();
-    console.log(place);
+    map.setCenter(place.geometry.location);
+    marker = new google.maps.Marker({
+        map: map,
+        draggable: true,
+        position: place.geometry.location
+    });
+    map.setZoom(17);  // Why 17? Because it looks
 
-    for (var component in componentForm) {
-        document.getElementById(component).value = '';
-        document.getElementById(component).disabled = false;
-    }
+    google.maps.event.addListener(marker, 'dragend', function() {
+        geocodePosition(marker.getPosition());
+    });
 
-    console.log(place.address_components);
+    // for (var component in componentForm) {
+    //     document.getElementById(component).value = '';
+    //     document.getElementById(component).disabled = false;
+    // }
+
     for (var i = 0; i < place.address_components.length; i++) {
         var addressType = place.address_components[i].types[0];
+        console.log(addressType);
         if (componentForm[addressType]) {
             var val = place.address_components[i][componentForm[addressType]];
             document.getElementById(addressType).value = val;
@@ -62,7 +86,8 @@ function geocodePosition(pos) {
         if (responses && responses.length > 0) {
             marker.formatted_address = responses[0].formatted_address;
             window.address = responses[0].formatted_address;
-            document.getElementById("placeSaved").value = window.address;
+            // document.getElementById("placeSaved").style.display="block";
+            document.getElementById("autocomplete").value = window.address;
 
         } else {
             marker.formatted_address = 'Cannot determine address at this location.';
