@@ -13,60 +13,62 @@
 		<title>Place Autocomplete Address Form</title>
 	</head>
 	<body>
-	<legend>Datos domiciliarios</legend>
-	<div class="container-fluid">
-	<!--
-		<div class="row">
-			<div class="col-sm-4">
-				<select id="department_p" class="form-control">
-					<option value>Departamento</option>
-					<option value="551153d2c6d99ea8b1a8b1ba">LIMA</option>
-				</select>
+		<div class="container address-form">
+			<legend>Dirección personal</legend>
+		<!--
+			<div class="row">
+				<div class="col-sm-4">
+					<select id="department_p" class="form-control">
+						<option value>Departamento</option>
+						<option value="551153d2c6d99ea8b1a8b1ba">LIMA</option>
+					</select>
+				</div>
+				<div class="col-sm-4">
+					<select id="province_p" class="form-control">
+						<option value>Provincia</option>
+						<option value="551153d2c6d99ea8b1a8b1ba">LIMA</option>
+					</select>
+				</div>
+				<div class="col-sm-4">
+					<select id="district_p" class="form-control" onchange="setAddress()">
+						<option value>Distrito</option>
+						<option value="5511536fc6d959de3ae6708e">Ate</option>
+						<option value="5511536fc6d959de3ae6708f">Barranco</option>
+					</select>
+				</div>
 			</div>
-			<div class="col-sm-4">
-				<select id="province_p" class="form-control">
-					<option value>Provincia</option>
-					<option value="551153d2c6d99ea8b1a8b1ba">LIMA</option>
-				</select>
+		-->
+			<div class="row" style="margin-top: 20px;">
+				<div class="col-sm-12" style="position: relative;">
+					<input id="autocomplete" placeholder="Ingresa tu dirección" type="text" style="width: 100%; margin-bottom: 20px;"/>
+					<button id="encuentrame" >Quiero que google me localice</button>
+				</div>
 			</div>
-			<div class="col-sm-4">
-				<select id="district_p" class="form-control" onchange="setAddress()">
-					<option value>Distrito</option>
-					<option value="5511536fc6d959de3ae6708e">Ate</option>
-					<option value="5511536fc6d959de3ae6708f">Barranco</option>
-				</select>
+			<div class="row">
+				<div class="col-sm-12" style="margin-bottom: 20px;">
+					<!--<button id="encuentrame" class="btn btn-primary">Encuentrame</button>-->
+					<input id="placeSaved" style="display: none;" type="text" style="width: 100%;">
+					<p style="font-size: 12px;font-weight: bold;">*Importante: Por favor asegúrate que el marcador rojo está colocado en la dirección correcta. En caso no esté ubicado donde debería, por favor moverlo.</p>
+				</div>
+				<div class="col-sm-12">
+					<div id="map" style="height: 200px; width: 100%"></div>
+				</div>
 			</div>
-		</div>
-	-->
-		<div class="row" style="margin-top: 20px;">
-			<div class="col-sm-12" style="position: relative;">
-				<input id="autocomplete" placeholder="Enter your address" type="text" style="width: 100%; margin-bottom: 20px;"/>
-				<button id="encuentrame" >Quiero que google me localice</button>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-12" style="margin-bottom: 20px;">
-				<!--<button id="encuentrame" class="btn btn-primary">Encuentrame</button>-->
-				<input id="placeSaved" style="display: none;" type="text" style="width: 100%;">
-				<p style="font-size: 12px;font-weight: bold;">*Importante: Por favor asegúrate que el marcador rojo está colocado en la dirección correcta. En caso no esté ubicado donde debería, por favor moverlo.</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-6">
+			<div class="address-types">
 				<div class="row">
-					<div class="input-field col-sm-12">
+					<div class="input-field col-sm-3">
 						<label for="locality">Distrito</label>
 						<input class="validate" id="locality" style="width: 100%;"/>
 					</div>
-					<div class="input-field col-sm-12">
+					<div class="input-field col-sm-3">
 						<label for="administrative_area_level_2">Provincia</label>
 						<input class="validate" id="administrative_area_level_2" style="width: 100%;" />
 					</div>
-					<div class="input-field col-sm-12">
+					<div class="input-field col-sm-3">
 						<label for="administrative_area_level_1">Departamento</label>
 						<input class="validate" id="administrative_area_level_1" style="width: 100%;" />
 					</div>
-					<div class="input-field col-sm-12">
+					<div class="input-field col-sm-3">
 						<label for="country">País</label>
 						<input class="validate" id="country" style="width: 100%;" />
 					</div>
@@ -88,11 +90,10 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-6">
-				<div id="map" style="height: 400px; width: 100%"></div>
-			</div>
+			<!--<div class="col-sm-6">-->
+				<!--<div id="map" style="height: 400px; width: 100%"></div>-->
+			<!--</div>-->
 		</div>
-	</div>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 			integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"

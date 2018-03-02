@@ -10,3 +10,13 @@
 .input-field{
     margin-bottom: 10px;
 }
+.address-form{
+    padding: 20px;
+    margin-top: 30px;
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+}
+.address-types{
+    font-size: 12px;
+    color: gray;
+    margin-top: 20px;
+}

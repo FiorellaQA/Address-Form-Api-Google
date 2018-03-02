@@ -34,7 +34,7 @@ function initAutocomplete() {
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 13,
         center: uluru,
-        disableDefaultUI: true
+        // disableDefaultUI: true
     });
 
     placeSearch = document.getElementById('autocomplete');
