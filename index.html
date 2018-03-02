@@ -5,50 +5,53 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" media="screen,projection">
+		<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" media="screen,projection">-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+			  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+			  crossorigin="anonymous">
 		<link rel="stylesheet" href="index.css">
 		<title>Place Autocomplete Address Form</title>
 	</head>
 	<body>
 	<legend>Datos domiciliarios</legend>
-	<form class="">
+	<div class="container-fluid">
 		<div class="row">
-			<div class="col s6">
+			<div class="col-sm-6">
 				<h3>Special title treatment</h3>
 				<p>Quiero ingresar mi dirección manualmente.</p>
 				<input id="autocomplete" placeholder="Enter your address" type="text" style="width: 100%; margin-bottom: 20px;"/>
 				<div class="row">
-					<div class="input-field col s12">
-						<input id="postal_code" />
+					<div class="input-field col-sm-12">
 						<label for="postal_code">Zip code</label>
+						<input id="postal_code" />
 					</div>
 				</div>
 				<div class="row">
-					<div class="input-field col s6">
-						<input class="validate" id="route"/>
+					<div class="input-field col-sm-6">
 						<label for="route">Dirección</label>
+						<input class="validate" id="route"/>
 					</div>
-					<div class="input-field col s6">
-						<input class="validate" id="street_number" />
+					<div class="input-field col-sm-6">
 						<label for="street_number">N°</label>
+						<input class="validate" id="street_number" />
 					</div>
 				</div>
 				<div class="row">
-					<div class="input-field col s4">
-						<input class="validate" id="locality"/>
+					<div class="input-field col-sm-4">
 						<label for="locality">Distrito</label>
+						<input class="validate" id="locality"/>
 					</div>
-					<div class="input-field col s4">
-						<input class="validate" id="administrative_area_level_1"/>
+					<div class="input-field col-sm-4">
 						<label for="administrative_area_level_1">Departamento/Provincia</label>
+						<input class="validate" id="administrative_area_level_1"/>
 					</div>
-					<div class="input-field col s4">
-						<input class="validate" id="country"/>
+					<div class="input-field col-sm-4">
 						<label for="country">País</label>
+						<input class="validate" id="country"/>
 					</div>
 				</div>
 			</div>
-			<div class="col s6">
+			<div class="col-sm-6">
 				<h3>Special title treatment</h3>
 				<div class="col-sm-12" style="margin-bottom: 20px;">
 					<p style="display: inline-block;">Quiero que google me geolocalice.</p>
@@ -62,9 +65,12 @@
 				</div>
 			</div>
 		</div>
-	</form>
+	</div>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+			integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+			crossorigin="anonymous"></script>
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>-->
 		<script src="app.js" type="text/javascript"></script>
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhL60w1feaFPqmrdbMrrkw1m0PR9Htyxc&libraries=places&callback=initAutocomplete"></script>
 	</body>
