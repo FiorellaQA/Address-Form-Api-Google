@@ -8,22 +8,8 @@ var componentForm = {
     country: 'long_name',
     postal_code: 'short_name'
 };
-/*
-for (var i = 0; i < place.address_components.length; i++) {
-    var addressType = place.address_components[i].types[0];
-    console.log(addressType);
-    if (componentForm[addressType]) {
-        var val = place.address_components[i][componentForm[addressType]];
-        document.getElementById(addressType).value = val;
-    }
-}
-
-*/
 var map = {};
-var latitud,
-    longitud,
-    miUbicacion,
-    placeSearch,
+var placeSearch,
     autocomplete,
     geocoder,
     marker;
@@ -36,7 +22,6 @@ function initAutocomplete() {
         center: uluru,
         // disableDefaultUI: true
     });
-
     placeSearch = document.getElementById('autocomplete');
     autocomplete = new google.maps.places.Autocomplete(placeSearch, {
         types: ['geocode'],
@@ -44,8 +29,10 @@ function initAutocomplete() {
             country: 'pe'
         }
     });
-
     autocomplete.addListener('place_changed', fillInAddress);
+    google.maps.event.addListener(marker, 'dragend', function() {
+        geocodePosition(marker.getPosition());
+    });
 }
 
 function fillInAddress() {
@@ -56,17 +43,7 @@ function fillInAddress() {
         draggable: true,
         position: place.geometry.location
     });
-    map.setZoom(17);  // Why 17? Because it looks
-
-    google.maps.event.addListener(marker, 'dragend', function() {
-        geocodePosition(marker.getPosition());
-    });
-
-    // for (var component in componentForm) {
-    //     document.getElementById(component).value = '';
-    //     document.getElementById(component).disabled = false;
-    // }
-
+    map.setZoom(17);
     for (var i = 0; i < place.address_components.length; i++) {
         var addressType = place.address_components[i].types[0];
         console.log(addressType);
@@ -76,9 +53,6 @@ function fillInAddress() {
         }
     }
 }
-
-
-
 function geocodePosition(pos) {
     geocoder.geocode({
         latLng: pos
@@ -88,22 +62,16 @@ function geocodePosition(pos) {
             window.address = responses[0].formatted_address;
             // document.getElementById("placeSaved").style.display="block";
             document.getElementById("autocomplete").value = window.address;
-
         } else {
             marker.formatted_address = 'Cannot determine address at this location.';
         }
     });
 }
 
-
-
-// --------Ubicandome------//
 document.getElementById("encuentrame").addEventListener("click",function(){
-
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(funcionExito, funcionError);
     }
-
     function funcionExito(pos){
         geocoder.geocode({
             latLng: {lat: pos.coords.latitude, lng: pos.coords.longitude}
@@ -127,10 +95,25 @@ document.getElementById("encuentrame").addEventListener("click",function(){
                 }
             });
         });
-
     }
-
     function funcionError(error){
         alert("Tenemos un problema con encontrar tu ubicación");
     }
 });
+
+/*
+for (var i = 0; i < place.address_components.length; i++) {
+    var addressType = place.address_components[i].types[0];
+    console.log(addressType);
+    if (componentForm[addressType]) {
+        var val = place.address_components[i][componentForm[addressType]];
+        document.getElementById(addressType).value = val;
+    }
+}
+
+for (var component in componentForm) {
+    document.getElementById(component).value = '';
+    document.getElementById(component).disabled = false;
+}
+
+*/
