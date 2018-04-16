@@ -1,3 +1,12 @@
+body{
+    background: #00ebc7;
+    background: -moz-linear-gradient(left, #00ebc7 0%, #016f5b 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, #00ebc7), color-stop(100%, #016f5b));
+    background: -webkit-linear-gradient(left, #00ebc7 0%, #016f5b 100%);
+    background: -o-linear-gradient(left, #00ebc7 0%, #016f5b 100%);
+    background: -ms-linear-gradient(left, #00ebc7 0%, #016f5b 100%);
+    background: linear-gradient(to right, #00ebc7 0%, #016f5b 100%);
+}
 #encuentrame {
     font-size: 10px;
     background-color: transparent;
@@ -11,8 +20,11 @@
     margin-bottom: 10px;
 }
 .address-form{
+    margin:15px;
+    border-radius: 20px;
+    background-color: #FFFFFF;
     padding: 20px;
-    margin-top: 30px;
+    /*margin-top: 30px;*/
     box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
 }
 .address-types{
@@ -20,3 +32,20 @@
     color: gray;
     margin-top: 20px;
 }
+legend{
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+    color:#07584b;
+}
+input{
+    height: 54px;
+    background: #fff;
+    border: 1px solid rgba(0,200,170,.4);
+    box-sizing: border-box;
+    box-shadow: 0 2px 15px rgba(0,0,0,.1);
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+
+/*font-family: 'Raleway', sans-serif;*/
