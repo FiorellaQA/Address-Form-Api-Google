@@ -7,32 +7,39 @@ body{
     background: -ms-linear-gradient(left, #00ebc7 0%, #016f5b 100%);
     background: linear-gradient(to right, #00ebc7 0%, #016f5b 100%);
 }
+
 #encuentrame {
-    font-size: 10px;
+    padding: 0;
+    text-decoration: underline;
+    font-weight: bold;
+    /* font-size: 10px; */
     background-color: transparent;
     border-color: transparent;
     color: blue;
-    position: absolute;
-    top: -44px;
-    right: 8px;
+    /*position: absolute;*/
+    /*top: -44px;*/
+    /*right: 8px;*/
 }
 .input-field{
     margin-bottom: 10px;
 }
-.address-form{
-    margin:15px;
+.form-body{
+    margin:10px;
     border-radius: 20px;
     background-color: #FFFFFF;
-    padding: 20px;
     /*margin-top: 30px;*/
     box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+}
+.padding-20{
+    padding: 20px;
 }
 .address-types{
     font-size: 12px;
     color: gray;
     margin-top: 20px;
 }
-legend{
+.form-title{
+    font-size: 21px;
     text-transform: uppercase;
     font-family: 'Oswald', sans-serif;
     color:#07584b;
@@ -43,10 +50,32 @@ input{
     background: #fff;
     border: 1px solid rgba(0,200,170,.4);
     box-sizing: border-box;
-    box-shadow: 0 2px 15px rgba(0,0,0,.1);
-    border-radius: 5px;
-    font-size: 18px;
+    /*box-shadow: 0 2px 15px rgba(0,0,0,.1);*/
+    /*border-radius: 5px;*/
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
-
+button.search{
+    color: #FFF;
+    background-color: #07584b;
+    width: 100%;
+    margin-bottom: 20px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-color:transparent;
+}
+#map{
+    height: 400px;
+    width: 100%;
+    padding: 0 !important;
+}
+.input-address{
+    width: 100%;
+    /*margin-bottom: 20px;*/
+}
+.disclaimer{
+    font-size: 12px;
+    font-weight: bold;
+}
 
 /*font-family: 'Raleway', sans-serif;*/
