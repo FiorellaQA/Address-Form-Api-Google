@@ -9,8 +9,8 @@ var componentForm = {
     postal_code: 'short_name'
 };
 var map = {};
-var placeSearch,
-    autocomplete,
+var placeSearch = document.getElementById('autocomplete');
+var autocomplete,
     geocoder,
     marker;
 
@@ -19,23 +19,22 @@ function initAutocomplete() {
     var uluru = {lat: -12.1191427, lng: -77.0349046};
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 13,
-        center: uluru,
-        // disableDefaultUI: true
+        center: uluru
+        // disableDefaultUI: false
     });
-    placeSearch = document.getElementById('autocomplete');
     autocomplete = new google.maps.places.Autocomplete(placeSearch, {
         types: ['geocode'],
         componentRestrictions: {
             country: 'pe'
         }
     });
-    autocomplete.addListener('place_changed', fillInAddress);
+    // autocomplete.addListener('place_changed', fillInAddress);
     google.maps.event.addListener(marker, 'dragend', function() {
         geocodePosition(marker.getPosition());
     });
 }
 
-function fillInAddress() {
+document.getElementById("search").addEventListener("click",function () {
     var place = autocomplete.getPlace();
     map.setCenter(place.geometry.location);
     marker = new google.maps.Marker({
@@ -52,7 +51,7 @@ function fillInAddress() {
             document.getElementById(addressType).value = val;
         }
     }
-}
+});
 function geocodePosition(pos) {
     geocoder.geocode({
         latLng: pos
