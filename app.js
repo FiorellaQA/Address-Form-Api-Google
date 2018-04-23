@@ -10,9 +10,9 @@ var componentForm = {
 };
 var map = {};
 var placeSearch = document.getElementById('autocomplete');
-var autocomplete,
-    geocoder,
-    marker;
+var autocomplete;
+var geocoder;
+var marker;
 
 function initAutocomplete() {
     geocoder = new google.maps.Geocoder();
@@ -22,27 +22,19 @@ function initAutocomplete() {
         center: uluru
         // disableDefaultUI: false
     });
-    autocomplete = new google.maps.places.Autocomplete(placeSearch, {
-        types: ['geocode'],
-        componentRestrictions: {
-            country: 'pe'
-        }
-    });
+
+    autocomplete = new google.maps.places.Autocomplete(placeSearch, {types: ['geocode'], componentRestrictions: {country: 'pe'}});
+
     // autocomplete.addListener('place_changed', fillInAddress);
-    google.maps.event.addListener(marker, 'dragend', function() {
-        geocodePosition(marker.getPosition());
-    });
+    // google.maps.event.addListener(marker, 'dragend', function() {
+    //     geocodePosition(marker.getPosition());
+    // });
 }
 
 document.getElementById("search").addEventListener("click",function () {
     var place = autocomplete.getPlace();
-    map.setCenter(place.geometry.location);
-    marker = new google.maps.Marker({
-        map: map,
-        draggable: true,
-        position: place.geometry.location
-    });
-    map.setZoom(17);
+    var location = place.geometry.location;
+    addMarker(location);
     for (var i = 0; i < place.address_components.length; i++) {
         var addressType = place.address_components[i].types[0];
         console.log(addressType);
@@ -52,6 +44,8 @@ document.getElementById("search").addEventListener("click",function () {
         }
     }
 });
+
+
 function geocodePosition(pos) {
     geocoder.geocode({
         latLng: pos
@@ -78,17 +72,10 @@ document.getElementById("encuentrame").addEventListener("click",function(){
             window.address = responses[0].formatted_address;
             geocoder.geocode( { 'address': window.address}, function(results, status) {
                 if (status === 'OK') {
-                    map.setCenter(results[0].geometry.location);
-                    marker = new google.maps.Marker({
-                        map: map,
-                        draggable: true,
-                        position: results[0].geometry.location
-                    });
-                    map.setZoom(18);
+                    var locationEncuentrame = results[0].geometry.location;
+                    addMarker(locationEncuentrame);
                     geocodePosition(marker.getPosition());
-                    google.maps.event.addListener(marker, 'dragend', function() {
-                        geocodePosition(marker.getPosition());
-                    });
+                    popu();
                 } else {
                     alert('Geocode was not successful for the following reason: ' + status);
                 }
@@ -100,7 +87,22 @@ document.getElementById("encuentrame").addEventListener("click",function(){
     }
 });
 
+function popu() {
+    var place = autocomplete.getPlace();
+    for (var i = 0; i < place.address_components.length; i++) {
+        var addressType = place.address_components[i].types[0];
+        console.log(addressType);
+        if (componentForm[addressType]) {
+            var val = place.address_components[i][componentForm[addressType]];
+            document.getElementById(addressType).value = val;
+        }
+    }
+}
+
+
+
 /*
+var place = autocomplete.getPlace();
 for (var i = 0; i < place.address_components.length; i++) {
     var addressType = place.address_components[i].types[0];
     console.log(addressType);
@@ -116,3 +118,21 @@ for (var component in componentForm) {
 }
 
 */
+
+function addMarker(location) {
+    if (!marker) {
+        map.setCenter(location);
+        map.setZoom(17);
+        marker = new google.maps.Marker({
+            position: location,
+            map: map,
+            draggable: true
+        });
+    } else {
+        marker.setPosition(location);
+        map.setCenter(location);
+    }
+    google.maps.event.addListener(marker, 'dragend', function() {
+        geocodePosition(marker.getPosition());
+    });
+}
