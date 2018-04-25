@@ -26,7 +26,7 @@ function clone(obj){
 
 
 function geocodePosition(pos) {
-    geocoder.geocode({1
+    geocoder.geocode({
         latLng: pos
     }, function(responses) {
         if (responses && responses.length > 0) {

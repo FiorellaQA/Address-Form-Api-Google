@@ -24,15 +24,17 @@ function initAutocomplete() {
     });
 
     autocomplete = new google.maps.places.Autocomplete(placeSearch, {types: ['geocode'], componentRestrictions: {country: 'pe'}});
-
-    // autocomplete.addListener('place_changed', fillInAddress);
+    autocomplete.addListener('place_changed', fillInAddress);
     // google.maps.event.addListener(marker, 'dragend', function() {
     //     geocodePosition(marker.getPosition());
     // });
 }
 
-document.getElementById("search").addEventListener("click",function () {
+function fillInAddress() {
     var place = autocomplete.getPlace();
+    // if(place === undefined) {
+    //     alert("oli");
+    // }
     var location = place.geometry.location;
     addMarker(location);
     for (var i = 0; i < place.address_components.length; i++) {
@@ -43,8 +45,7 @@ document.getElementById("search").addEventListener("click",function () {
             document.getElementById(addressType).value = val;
         }
     }
-});
-
+}
 
 function geocodePosition(pos) {
     geocoder.geocode({
@@ -88,6 +89,7 @@ document.getElementById("encuentrame").addEventListener("click",function(){
 });
 
 function popu() {
+    console.log("popu");
     var place = autocomplete.getPlace();
     for (var i = 0; i < place.address_components.length; i++) {
         var addressType = place.address_components[i].types[0];
@@ -136,3 +138,20 @@ function addMarker(location) {
         geocodePosition(marker.getPosition());
     });
 }
+
+document.getElementById("search").addEventListener("click",function () {
+    var place = autocomplete.getPlace();
+    // if(place === undefined) {
+    //     alert("oli");
+    // }
+    var location = place.geometry.location;
+    addMarker(location);
+    for (var i = 0; i < place.address_components.length; i++) {
+        var addressType = place.address_components[i].types[0];
+        console.log(addressType);
+        if (componentForm[addressType]) {
+            var val = place.address_components[i][componentForm[addressType]];
+            document.getElementById(addressType).value = val;
+        }
+    }
+});
